@@ -12,7 +12,8 @@ public class playerController : MonoBehaviour
     public float acceleration;
     public float strafeAcceleration;
     public float turnSpeed;
-    
+    public float jumpForce;
+
     void Start()
     { 
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,6 +31,12 @@ public class playerController : MonoBehaviour
         orientation.forward = camDirection.normalized;
         
         capsuleHitbox.forward = Vector3.Lerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
+        
+        bool jumpInput = Input.GetButtonDown("Jump");
+        if (jumpInput)
+        {
+            capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
+        }
     }
 
     void FixedUpdate()
@@ -46,5 +53,25 @@ public class playerController : MonoBehaviour
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.right * strafeAcceleration * horizontalInput, ForceMode.Acceleration);
         }
+        
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(capsuleHitbox.position, transform.TransformDirection(Vector3.down), out hit, 3f,LayerMask.GetMask("Default")))
+        { 
+            Debug.DrawRay(capsuleHitbox.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow); 
+            Debug.Log("Did Hit");
+            capsuleHitboxRB.AddForce(-Physics.gravity * 5, ForceMode.Acceleration);
+        }
+        else
+        { 
+            Debug.DrawRay(capsuleHitbox.position, transform.TransformDirection(Vector3.down) * 1000, Color.white); 
+            Debug.Log("Did not Hit");
+            capsuleHitboxRB.AddForce(Physics.gravity * 5, ForceMode.Acceleration);
+        }
+    }
+
+    void spring()
+    {
+        
     }
 }
