@@ -10,6 +10,7 @@ public class playerController : MonoBehaviour
     public Rigidbody capsuleHitboxRB;
 
     public float acceleration;
+    public float strafeAcceleration;
     public float turnSpeed;
     
     void Start()
@@ -28,16 +29,22 @@ public class playerController : MonoBehaviour
         Vector3 camDirection = capsuleHitbox.position - new Vector3(cam.position.x, capsuleHitbox.position.y, cam.position.z);
         orientation.forward = camDirection.normalized;
         
-        capsuleHitbox.forward = Vector3.Slerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
+        capsuleHitbox.forward = Vector3.Lerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
     }
 
     void FixedUpdate()
     {
         float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
         
         if (verticalInput > 0)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.forward * acceleration, ForceMode.Acceleration);
+        }
+
+        if (horizontalInput != 0)
+        {
+            capsuleHitboxRB.AddForce(capsuleHitbox.right * strafeAcceleration * horizontalInput, ForceMode.Acceleration);
         }
     }
 }

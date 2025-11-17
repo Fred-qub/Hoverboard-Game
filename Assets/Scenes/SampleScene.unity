@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18910748, y: -0.0000012983888, z: 0.00000025004678, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910751, y: -0.0000033567915, z: 0.0000006464589, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 3, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -299,6 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383137401}
   - component: {fileID: 383137402}
+  - component: {fileID: 383137403}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -339,8 +340,23 @@ MonoBehaviour:
   cam: {fileID: 1816864108}
   capsuleHitbox: {fileID: 1215283619}
   capsuleHitboxRB: {fileID: 1215283620}
-  acceleration: 20
-  turnSpeed: 0.5
+  acceleration: 64.6
+  strafeAcceleration: 37
+  turnSpeed: 1
+--- !u!114 &383137403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383137400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b22cc10f597d84092eaef4d9cc1b41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 702535763}
+  capsuleHitboxRB: {fileID: 1215283620}
 --- !u!1 &388887396
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,38 +618,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 383137401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &697808998
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 697808999}
-  m_Layer: 0
-  m_Name: boardPivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &697808999
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697808998}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 702535763}
-  m_Father: {fileID: 1215283619}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &702535762
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +629,8 @@ GameObject:
   - component: {fileID: 702535763}
   - component: {fileID: 702535766}
   - component: {fileID: 702535765}
+  - component: {fileID: 702535768}
+  - component: {fileID: 702535767}
   m_Layer: 0
   m_Name: board
   m_TagString: Untagged
@@ -661,11 +647,11 @@ Transform:
   m_GameObject: {fileID: 702535762}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0.61}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0.61}
   m_LocalScale: {x: 1, y: 0.1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 697808999}
+  m_Father: {fileID: 1215283619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &702535765
 MeshRenderer:
@@ -720,6 +706,72 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702535762}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!59 &702535767
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702535762}
+  serializedVersion: 3
+  m_ConnectedBody: {fileID: 1215283620}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 15, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 1, z: 0}
+  m_UseSpring: 1
+  m_Spring:
+    spring: 113.53
+    damper: 41.2
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 1
+  m_ExtendedLimits: 0
+  m_UseAcceleration: 1
+  m_Limits:
+    min: -30
+    max: 30
+    bounciness: 0
+    bounceMinVelocity: 0
+    contactDistance: 0.45
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 2.31
+  m_ConnectedMassScale: 0.00001
+--- !u!54 &702535768
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702535762}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +854,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 697808999}
+  - {fileID: 702535763}
   m_Father: {fileID: 383137401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1215283620
@@ -1029,9 +1081,9 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 0.5, y: 0.2}
   Lookahead:
-    Enabled: 0
-    Time: 0
-    Smoothing: 0
+    Enabled: 1
+    Time: 0.2
+    Smoothing: 4.8
     IgnoreY: 0
 --- !u!114 &1816864106
 MonoBehaviour:
@@ -1048,7 +1100,7 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 1, y: 1, z: 1}
+    PositionDamping: {x: 0, y: 0, z: 0}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
@@ -1056,15 +1108,15 @@ MonoBehaviour:
   Radius: 5
   Orbits:
     Top:
-      Radius: 3
-      Height: 6
+      Radius: 4
+      Height: 4
     Center:
       Radius: 5
       Height: 2
     Bottom:
       Radius: 3
       Height: 0.1
-    SplineCurvature: 0.3
+    SplineCurvature: 1
   RecenteringTarget: 2
   HorizontalAxis:
     Value: 0
@@ -1147,7 +1199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816864102}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18910746, y: -0.0000012983888, z: 0.0000002500468, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910748, y: -0.000003356791, z: 0.00000064645855, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 3, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
