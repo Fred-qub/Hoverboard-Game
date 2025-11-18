@@ -14,6 +14,10 @@ public class playerController : MonoBehaviour
     public float turnSpeed;
     public float jumpForce;
 
+    public float hoverHeight;
+    public float hoverStrength;
+    public float springDampener;
+
     void Start()
     { 
         Cursor.lockState = CursorLockMode.Locked;
@@ -41,6 +45,12 @@ public class playerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (capsuleHitbox.forward != orientation.forward)
+        {
+            //capsuleHitboxRB.AddTorque(transform.up * turnSpeed, ForceMode.Acceleration);
+        }
+        
+        
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
         
@@ -52,21 +62,30 @@ public class playerController : MonoBehaviour
         if (horizontalInput != 0)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.right * strafeAcceleration * horizontalInput, ForceMode.Acceleration);
+            //capsuleHitboxRB.AddTorque(transform.up * turnSpeed * horizontalInput, ForceMode.Acceleration);
         }
         
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(capsuleHitbox.position, transform.TransformDirection(Vector3.down), out hit, 3f,LayerMask.GetMask("Default")))
+        RaycastHit groundHit;
+        
+        if (Physics.Raycast(capsuleHitbox.position, transform.TransformDirection(Vector3.down), out groundHit, 3f,LayerMask.GetMask("Default")))
         { 
-            Debug.DrawRay(capsuleHitbox.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.yellow); 
+            Debug.DrawRay(capsuleHitbox.position, transform.TransformDirection(Vector3.down) * groundHit.distance, Color.yellow); 
             Debug.Log("Did Hit");
-            capsuleHitboxRB.AddForce(-Physics.gravity * 5, ForceMode.Acceleration);
+            
+            Vector3 velocity = capsuleHitboxRB.linearVelocity;
+            float downVelocity = Vector3.Dot(Vector3.down, velocity);
+            
+            float hoverDifference = groundHit.distance - hoverHeight;
+            float springForce = (hoverDifference * hoverStrength) - (downVelocity * springDampener);
+            
+            
+            capsuleHitboxRB.AddForce(Vector3.down * springForce, ForceMode.Acceleration);
         }
         else
         { 
             Debug.DrawRay(capsuleHitbox.position, transform.TransformDirection(Vector3.down) * 1000, Color.white); 
             Debug.Log("Did not Hit");
-            capsuleHitboxRB.AddForce(Physics.gravity * 5, ForceMode.Acceleration);
+            //capsuleHitboxRB.AddForce(Physics.gravity * 5, ForceMode.Acceleration);
         }
     }
 
