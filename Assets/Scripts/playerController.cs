@@ -45,12 +45,6 @@ public class playerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (capsuleHitbox.forward != orientation.forward)
-        {
-            //capsuleHitboxRB.AddTorque(transform.up * turnSpeed, ForceMode.Acceleration);
-        }
-        
-        
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
         
@@ -62,30 +56,19 @@ public class playerController : MonoBehaviour
         if (horizontalInput != 0)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.right * strafeAcceleration * horizontalInput, ForceMode.Acceleration);
-            //capsuleHitboxRB.AddTorque(transform.up * turnSpeed * horizontalInput, ForceMode.Acceleration);
         }
         
         RaycastHit groundHit;
         
         if (Physics.Raycast(capsuleHitbox.position, transform.TransformDirection(Vector3.down), out groundHit, 3f,LayerMask.GetMask("Default")))
         { 
-            Debug.DrawRay(capsuleHitbox.position, transform.TransformDirection(Vector3.down) * groundHit.distance, Color.yellow); 
-            Debug.Log("Did Hit");
-            
             Vector3 velocity = capsuleHitboxRB.linearVelocity;
             float downVelocity = Vector3.Dot(Vector3.down, velocity);
             
             float hoverDifference = groundHit.distance - hoverHeight;
             float springForce = (hoverDifference * hoverStrength) - (downVelocity * springDampener);
             
-            
             capsuleHitboxRB.AddForce(Vector3.down * springForce, ForceMode.Acceleration);
-        }
-        else
-        { 
-            Debug.DrawRay(capsuleHitbox.position, transform.TransformDirection(Vector3.down) * 1000, Color.white); 
-            Debug.Log("Did not Hit");
-            //capsuleHitboxRB.AddForce(Physics.gravity * 5, ForceMode.Acceleration);
         }
     }
 
