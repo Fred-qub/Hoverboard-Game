@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Splines.Interpolators;
 
 public class boardAnimation : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class boardAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //boardPivot.rotation = Quaternion.AngleAxis() capsuleHitboxRB.linearVelocity.magnitude;
+        //Takes the current 
+        Quaternion velRot = Quaternion.Euler(capsuleHitboxRB.linearVelocity.normalized);
+        board.localRotation = Quaternion.Slerp(board.localRotation, velRot, 0.1f * Time.deltaTime);
     }
 }

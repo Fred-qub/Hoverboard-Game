@@ -299,7 +299,6 @@ GameObject:
   m_Component:
   - component: {fileID: 383137401}
   - component: {fileID: 383137402}
-  - component: {fileID: 383137403}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -344,23 +343,9 @@ MonoBehaviour:
   strafeAcceleration: 37
   turnSpeed: 1
   jumpForce: 30
-  hoverHeight: 3
-  hoverStrength: 20
-  springDampener: 1
---- !u!114 &383137403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383137400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b22cc10f597d84092eaef4d9cc1b41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  board: {fileID: 702535763}
-  capsuleHitboxRB: {fileID: 1215283620}
+  hoverHeight: 6.15
+  hoverStrength: 50
+  springDampener: 7.7
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +511,7 @@ GameObject:
   - component: {fileID: 702535765}
   - component: {fileID: 702535768}
   - component: {fileID: 702535767}
+  - component: {fileID: 702535769}
   m_Layer: 0
   m_Name: board
   m_TagString: Untagged
@@ -542,7 +528,7 @@ Transform:
   m_GameObject: {fileID: 702535762}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0.6}
+  m_LocalPosition: {x: 0, y: -1, z: 0.6}
   m_LocalScale: {x: 1, y: 0.1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -614,17 +600,17 @@ HingeJoint:
   m_Anchor: {x: 0, y: 15, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 1, z: 0.6}
+  m_ConnectedAnchor: {x: 0, y: 0.5, z: 0.6}
   m_UseSpring: 1
   m_Spring:
-    spring: 113.53
-    damper: 27.66
+    spring: 56.57
+    damper: 113.33
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
     targetVelocity: 0
-    force: 0
-    freeSpin: 0
+    force: 5
+    freeSpin: 1
   m_UseLimits: 1
   m_ExtendedLimits: 0
   m_UseAcceleration: 1
@@ -633,12 +619,12 @@ HingeJoint:
     max: 30
     bounciness: 0
     bounceMinVelocity: 0
-    contactDistance: 0.45
+    contactDistance: 4
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 2.31
+  m_MassScale: 10.8
   m_ConnectedMassScale: 0.00001
 --- !u!54 &702535768
 Rigidbody:
@@ -667,6 +653,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &702535769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702535762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b22cc10f597d84092eaef4d9cc1b41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 702535763}
+  capsuleHitboxRB: {fileID: 1215283620}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +786,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215283618}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
