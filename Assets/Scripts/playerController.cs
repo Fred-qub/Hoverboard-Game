@@ -1,10 +1,13 @@
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
     public Transform orientation;
-    public Transform cam;
+    public Transform camPosition;
+    public GameObject playerCam;
+    public CinemachineCamera cinemachineCamera;
     
     public Transform capsuleHitbox;
     public Rigidbody capsuleHitboxRB;
@@ -13,6 +16,8 @@ public class playerController : MonoBehaviour
     public float strafeAcceleration;
     public float turnSpeed;
     public float jumpForce;
+    
+    public float boostAcceleration;
 
     public float hoverHeight;
     public float hoverStrength;
@@ -23,7 +28,9 @@ public class playerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
-        cam = GameObject.Find("Player Camera").transform;
+        playerCam = GameObject.Find("Player Camera");
+        camPosition = playerCam.transform;
+        cinemachineCamera = playerCam.GetComponent<CinemachineCamera>();
         
         capsuleHitbox = transform.Find("capsuleHitbox").transform;
         capsuleHitboxRB = capsuleHitbox.GetComponent<Rigidbody>();  
@@ -31,7 +38,7 @@ public class playerController : MonoBehaviour
     
     void Update()
     {
-        Vector3 camDirection = capsuleHitbox.position - new Vector3(cam.position.x, capsuleHitbox.position.y, cam.position.z);
+        Vector3 camDirection = capsuleHitbox.position - new Vector3(camPosition.position.x, capsuleHitbox.position.y, camPosition.position.z);
         orientation.forward = camDirection.normalized;
         
         capsuleHitbox.forward = Vector3.Slerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
@@ -40,6 +47,18 @@ public class playerController : MonoBehaviour
         if (jumpInput)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
+        }
+        
+        bool boostInput = Input.GetKey(KeyCode.LeftShift);
+        if (boostInput)
+        {
+            capsuleHitboxRB.AddForce(capsuleHitbox.forward * boostAcceleration, ForceMode.Acceleration);
+            cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 110f, Time.deltaTime);
+
+        }
+        else
+        {
+            cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 90f, Time.deltaTime * 2);
         }
     }
 
@@ -70,10 +89,5 @@ public class playerController : MonoBehaviour
             
             capsuleHitboxRB.AddForce(Vector3.down * springForce, ForceMode.Acceleration);
         }
-    }
-
-    void spring()
-    {
-        
     }
 }
