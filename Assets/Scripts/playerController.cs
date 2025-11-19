@@ -23,6 +23,10 @@ public class playerController : MonoBehaviour
     public float hoverStrength;
     public float springDampener;
 
+    public bool grounded = true;
+    public float groundedBuffer;
+    public static float coyoteTime = 0.5f;
+
     void Start()
     { 
         Cursor.lockState = CursorLockMode.Locked;
@@ -38,13 +42,17 @@ public class playerController : MonoBehaviour
     
     void Update()
     {
+        groundedBuffer = (groundedBuffer - Time.deltaTime);
+
+        grounded = groundedBuffer >= 0f;
+        
         Vector3 camDirection = capsuleHitbox.position - new Vector3(camPosition.position.x, capsuleHitbox.position.y, camPosition.position.z);
         orientation.forward = camDirection.normalized;
         
         capsuleHitbox.forward = Vector3.Slerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
         
         bool jumpInput = Input.GetButtonDown("Jump");
-        if (jumpInput)
+        if (jumpInput  && grounded)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
         }
@@ -88,6 +96,7 @@ public class playerController : MonoBehaviour
             float springForce = (hoverDifference * hoverStrength) - (downVelocity * springDampener);
             
             capsuleHitboxRB.AddForce(Vector3.down * springForce, ForceMode.Acceleration);
+            groundedBuffer = coyoteTime;
         }
     }
 }
