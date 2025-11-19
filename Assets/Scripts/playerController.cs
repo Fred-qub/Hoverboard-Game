@@ -49,7 +49,8 @@ public class playerController : MonoBehaviour
         Vector3 camDirection = capsuleHitbox.position - new Vector3(camPosition.position.x, capsuleHitbox.position.y, camPosition.position.z);
         orientation.forward = camDirection.normalized;
         
-        capsuleHitbox.forward = Vector3.Slerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
+        //capsuleHitbox.forward = Vector3.Slerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
+        capsuleHitbox.forward = orientation.forward;
         
         bool jumpInput = Input.GetButtonDown("Jump");
         if (jumpInput  && grounded)
