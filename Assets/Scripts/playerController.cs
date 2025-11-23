@@ -24,46 +24,51 @@ public class playerController : MonoBehaviour
     public float springDampener;
 
     public bool grounded = true;
-    public float groundedBuffer;
+    public float groundedBuffer = 1f;
     public static float coyoteTime = 0.5f;
 
     void Start()
     { 
+        //locks and hides mouse cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
+        //assigns the camera, its position and the cinemachine component
         playerCam = GameObject.Find("Player Camera");
         camPosition = playerCam.transform;
         cinemachineCamera = playerCam.GetComponent<CinemachineCamera>();
         
+        //assigns the player hitbox position and rigidbody
         capsuleHitbox = transform.Find("capsuleHitbox").transform;
         capsuleHitboxRB = capsuleHitbox.GetComponent<Rigidbody>();  
     }
-    
-    void Update()
-    {
-        groundedBuffer = (groundedBuffer - Time.deltaTime);
 
+    void groundedCountdown()
+    {
+        //counts down constantly, as long as the buffer is above 0 grounded is true
+        groundedBuffer = (groundedBuffer - Time.deltaTime);
         grounded = groundedBuffer >= 0f;
-        
-        Vector3 camDirection = capsuleHitbox.position - new Vector3(camPosition.position.x, capsuleHitbox.position.y, camPosition.position.z);
-        orientation.forward = camDirection.normalized;
-        
-        //capsuleHitbox.forward = Vector3.Slerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
-        capsuleHitbox.forward = orientation.forward;
-        
+    }
+
+    void jump()
+    {
+        //gets the input, performs a jump if the player is grounded
         bool jumpInput = Input.GetButtonDown("Jump");
         if (jumpInput  && grounded)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
-        }
-        
+        } 
+    }
+
+    void boost()
+    {
+        //gets the input, applies a constant force if the key is held, also smoothly adjusts the FOV of the camera
+        //also smoothly adjusts the camera FOV back, but faster
         bool boostInput = Input.GetKey(KeyCode.LeftShift);
         if (boostInput)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.forward * boostAcceleration, ForceMode.Acceleration);
             cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 110f, Time.deltaTime);
-
         }
         else
         {
@@ -71,8 +76,28 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void rotatePlayerToCamera()
     {
+        //creates a new vector that represents the direction from the camera to the player, ignoring the Y axis,
+        //uses the empty orientation gameobject's transform's forward vectore to store this direction,
+        //then smoothly adjusts the forward vector of the player's transform to rotate the player.
+        //currently is slow after building and running on slower machines needs fixed
+        Vector3 camDirection = capsuleHitbox.position - new Vector3(camPosition.position.x, capsuleHitbox.position.y, camPosition.position.z);
+        orientation.forward = camDirection.normalized;
+        capsuleHitbox.forward = Vector3.Slerp(capsuleHitbox.forward, orientation.forward, turnSpeed * Time.fixedDeltaTime);
+    }
+    
+    void Update()
+    {
+        groundedCountdown();
+        jump();
+        boost();
+        rotatePlayerToCamera();
+    }
+
+    void movement()
+    {
+        //gets the inputs for the 2 axis, then applies acceleration when their keys are held
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
         
@@ -84,10 +109,14 @@ public class playerController : MonoBehaviour
         if (horizontalInput != 0)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.right * strafeAcceleration * horizontalInput, ForceMode.Acceleration);
-        }
-        
+        } 
+    }
+
+    void hoveringAndGroundDetection()
+    {
+        //sends a raycast down, uses it to tell how far away the ground is, accelerates the board up or down following a dampening ratio tied to height
+        //needs to be adjusted with object layers in the future
         RaycastHit groundHit;
-        
         if (Physics.Raycast(capsuleHitbox.position, transform.TransformDirection(Vector3.down), out groundHit, 3f,LayerMask.GetMask("Default")))
         { 
             Vector3 velocity = capsuleHitboxRB.linearVelocity;
@@ -97,7 +126,16 @@ public class playerController : MonoBehaviour
             float springForce = (hoverDifference * hoverStrength) - (downVelocity * springDampener);
             
             capsuleHitboxRB.AddForce(Vector3.down * springForce, ForceMode.Acceleration);
+            
+            //resets the grounded buffer countdown
+            //add input buffering back up in the jump method maybe?
             groundedBuffer = coyoteTime;
         }
+    }
+    
+    void FixedUpdate()
+    {
+        movement();
+        hoveringAndGroundDetection();
     }
 }
