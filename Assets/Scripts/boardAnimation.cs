@@ -19,8 +19,8 @@ public class boardAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Quaternion velRot = Quaternion.Euler(capsuleHitboxRB.linearVelocity.normalized);
-        board.localRotation = Quaternion.Slerp(board.localRotation, velRot, 0.1f * Time.deltaTime);
+        //Quaternion velRot = Quaternion.Euler(capsuleHitboxRB.linearVelocity.normalized);
+        //board.localRotation = Quaternion.Slerp(board.localRotation, velRot, 0.1f * Time.deltaTime);
         trail.emitting = (capsuleHitboxRB.linearVelocity.magnitude >= 100f);
 
     }
