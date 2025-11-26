@@ -68,7 +68,7 @@ public class playerController : MonoBehaviour
         if (boostInput)
         {
             capsuleHitboxRB.AddForce(capsuleHitbox.forward * boostAcceleration, ForceMode.Acceleration);
-            cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 110f, Time.deltaTime);
+            cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 130f, Time.deltaTime);
         }
         else
         {
