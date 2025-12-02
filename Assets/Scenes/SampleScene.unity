@@ -2538,6 +2538,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e2a4842d94d4d4db3ad0acbd250dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dudeThighL: {fileID: 1621710611}
+  dudeThighR: {fileID: 2009431075}
+  capsuleHitboxRB: {fileID: 2141469837}
+  Yoffset: 1
+  scale: 0.0001
 --- !u!114 &1432812186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3506,6 +3511,11 @@ MonoBehaviour:
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
+--- !u!54 &2141469837 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1182909042948260300, guid: 115b4583d8d965d48b832f5cf891fd3d, type: 3}
+  m_PrefabInstance: {fileID: 3564677863404276207}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &755957049787129048
 PrefabInstance:
   m_ObjectHideFlags: 0
