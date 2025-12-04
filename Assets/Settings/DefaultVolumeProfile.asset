@@ -37,13 +37,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {r: 0.44463208, g: 0.44299573, b: 0.5188679, a: 1}
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   highlights:
     m_OverrideState: 1
-    m_Value: {r: 0.8867924, g: 0.8160855, b: 0.74038804, a: 1}
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   balance:
     m_OverrideState: 1
-    m_Value: 10.5
+    m_Value: 0
 --- !u!114 &-8104416584915340131
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -161,19 +161,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.96
   contrast:
     m_OverrideState: 1
-    m_Value: 15.2
+    m_Value: 19
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.9841611, b: 0.9669811, a: 1}
+    m_Value: {r: 0.9094558, g: 0.87340075, b: 0.8536873, a: 1}
   hueShift:
     m_OverrideState: 1
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 27.6
+    m_Value: 5.7
 --- !u!114 &-6288072647309666549
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -366,10 +366,10 @@ MonoBehaviour:
     m_Value: 0.99
   intensity:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 56.54
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.695
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -547,13 +547,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.7727355, y: 0.82223403, z: 1, w: -0.06896553}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -1.2845829e-10}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9609353, z: 0.7354901, w: 0.01724138}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
@@ -887,10 +887,10 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.373
+    m_Value: 0.316
   rounded:
     m_OverrideState: 1
     m_Value: 1

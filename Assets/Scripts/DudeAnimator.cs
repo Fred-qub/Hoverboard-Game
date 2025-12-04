@@ -10,6 +10,8 @@ public class DudeAnimator : MonoBehaviour
     public float scale = 70f;
     public Transform leftFootIKPoint;
     public Transform rightFootIKPoint;
+    public Transform leftFoot;
+    public Transform rightFoot;
     
     private float scaledYVelocity;
     private Vector3 targetWaistPosition;
@@ -49,6 +51,8 @@ public class DudeAnimator : MonoBehaviour
         waist.localPosition = Vector3.Lerp(waist.localPosition, targetWaistPosition, Mathf.Clamp01(scaledYVelocity));
         leftFootIKPoint.localPosition = Vector3.Lerp(leftFootIKPoint.localPosition, targetLeftFootIKPosition, Mathf.Clamp01(scaledYVelocity)*0.2f);
         rightFootIKPoint.localPosition = Vector3.Lerp(rightFootIKPoint.localPosition, targetRightFootIKPosition, Mathf.Clamp01(scaledYVelocity)*0.2f);
+        leftFoot.position = leftFootIKPoint.position;
+        rightFoot.position = rightFootIKPoint.position;
     }
 }
 
