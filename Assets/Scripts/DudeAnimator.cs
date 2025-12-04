@@ -5,45 +5,51 @@ public class DudeAnimator : MonoBehaviour
 {
     public Transform waist;
     public Rigidbody capsuleHitboxRB;
-    public float Yoffset = -0.005f;
+    public float waistYoffset = -0.005f;
+    public float IKPointOffset = 0.1f;
     public float scale = 70f;
-    public float minVelocityRequirement = 10f;
-
-    // divide velocity by 70 to scale it down (player normally doesn't move up or down faster than 70, so this makes it around -1 to 1.
-    //target position = vector3 zero + new vector (0f, 0f, Yoffset)
-    //goes in z because waist has Y and Z flipped cus of blender
-    //take an object's local position and lerp it between its current local position and its target position
-
+    public Transform leftFootIKPoint;
+    public Transform rightFootIKPoint;
+    
     private float scaledYVelocity;
-    private Vector3 targetPosition;
-    private Vector3 initialPosition;
+    private Vector3 targetWaistPosition;
+    private Vector3 initialWaistPosition;
+    private Vector3 initialLeftFootIKPosition;
+    private Vector3 initialRightFootIKPosition;
+    private Vector3 targetLeftFootIKPosition;
+    private Vector3 targetRightFootIKPosition;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        initialPosition = waist.localPosition;
+        initialWaistPosition = waist.localPosition;
+        initialLeftFootIKPosition = leftFootIKPoint.localPosition;
+        initialRightFootIKPosition = rightFootIKPoint.localPosition;
     }
 
     void LateUpdate()
     {
         scaledYVelocity = capsuleHitboxRB.linearVelocity.y / scale;
-        //Debug.Log("scaled:" + scaledYVelocity);
-        //Debug.Log("y velocity" + capsuleHitboxRB.linearVelocity.y);
 
         if (capsuleHitboxRB.linearVelocity.y < 0)
         {
             scaledYVelocity = -scaledYVelocity;
-            targetPosition = new Vector3(initialPosition.x, initialPosition.y, Yoffset); 
+            targetWaistPosition = new Vector3(initialWaistPosition.x, initialWaistPosition.y, waistYoffset);
+            targetLeftFootIKPosition = new Vector3(initialLeftFootIKPosition.x, initialLeftFootIKPosition.y-IKPointOffset, initialLeftFootIKPosition.z);
+            targetRightFootIKPosition = new Vector3(initialRightFootIKPosition.x, initialRightFootIKPosition.y-IKPointOffset, initialRightFootIKPosition.z);
+
         }
         else if (capsuleHitboxRB.linearVelocity.y > 0)
         {
-            targetPosition = new Vector3(initialPosition.x, initialPosition.y, -Yoffset);
+            targetWaistPosition = new Vector3(initialWaistPosition.x, initialWaistPosition.y, -waistYoffset);
+            targetLeftFootIKPosition = new Vector3(initialLeftFootIKPosition.x, initialLeftFootIKPosition.y + IKPointOffset, initialLeftFootIKPosition.z);
+            targetRightFootIKPosition = new Vector3(initialRightFootIKPosition.x, initialRightFootIKPosition.y + IKPointOffset, initialRightFootIKPosition.z);
         }
-        
-        waist.localPosition = Vector3.Lerp(waist.localPosition, targetPosition, Mathf.Clamp01(scaledYVelocity));
-        
-        Debug.Log("Target Position: " + targetPosition + "Current Position: " + waist.localPosition + "Scaled Velocity: " + scaledYVelocity);
-        
+        waist.localPosition = Vector3.Lerp(waist.localPosition, targetWaistPosition, Mathf.Clamp01(scaledYVelocity));
+        leftFootIKPoint.localPosition = Vector3.Lerp(leftFootIKPoint.localPosition, targetLeftFootIKPosition, Mathf.Clamp01(scaledYVelocity)*0.2f);
+        rightFootIKPoint.localPosition = Vector3.Lerp(rightFootIKPoint.localPosition, targetRightFootIKPosition, Mathf.Clamp01(scaledYVelocity)*0.2f);
     }
 }
+
+

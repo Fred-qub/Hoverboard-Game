@@ -2556,9 +2556,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waist: {fileID: 803927365}
   capsuleHitboxRB: {fileID: 2141469837}
-  Yoffset: 0.01
+  waistYoffset: -0.005
+  IKPointOffset: 0.05
   scale: 50
-  minVelocityRequirement: 10
+  leftFootIKPoint: {fileID: 30639441}
+  rightFootIKPoint: {fileID: 496227568}
 --- !u!114 &1432812186
 MonoBehaviour:
   m_ObjectHideFlags: 0
