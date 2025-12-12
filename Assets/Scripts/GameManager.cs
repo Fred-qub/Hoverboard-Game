@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
             }
         }
         
+        
+        
         lastCheckpointIndex = checkpointIndex;
         Debug.Log("The last checkpoint is now " + lastCheckpointIndex);
     }
@@ -72,7 +74,6 @@ public class GameManager : MonoBehaviour
     {
         if ((!raceStarted && checkpointIndex != 0) || raceFinished)
         {
-            Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is wrong");
             return;
         }
 
@@ -80,6 +81,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is correct");
             UpdateCheckpoint(checkpointIndex);
+        }
+        else
+        {
+            Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is wrong");
         }
     }
 }
