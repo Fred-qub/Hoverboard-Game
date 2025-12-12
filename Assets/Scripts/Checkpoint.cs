@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    public int checkpointIndex;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,5 +14,15 @@ public class Checkpoint : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Checkpoint " + checkpointIndex + " passed");
+            GameManager.instance.CheckpointPassed(checkpointIndex);
+            
+        }
     }
 }
