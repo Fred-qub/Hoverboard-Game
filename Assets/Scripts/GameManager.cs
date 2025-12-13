@@ -57,15 +57,16 @@ public class GameManager : MonoBehaviour
             {
                 StartRace();
             }
+            
             else if (lastCheckpointIndex == checkpoints.Length - 1)
             {
                 Debug.Log("Lap completed");
                 OnLapFinished();
             }
         }
-        
-        
-        
+
+
+
         lastCheckpointIndex = checkpointIndex;
         Debug.Log("The last checkpoint is now " + lastCheckpointIndex);
     }
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (checkpointIndex == lastCheckpointIndex + 1)
+        if ((checkpointIndex == lastCheckpointIndex + 1) || (checkpointIndex == 0 && lastCheckpointIndex == checkpoints.Length - 1))
         {
             Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is correct");
             UpdateCheckpoint(checkpointIndex);
