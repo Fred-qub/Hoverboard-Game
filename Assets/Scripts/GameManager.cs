@@ -28,19 +28,18 @@ public class GameManager : MonoBehaviour
     private float prevLapTime = 0f;
     private float lapTimeDifference = 0f;
 
-    private void Update()
-    {
-        UpdateTimerUI();
-    }
+    private float UIBuffer = 0f;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (raceStarted)
         {
             UpdateTimers();
         }
+        
+        UpdateTimerUI();
     }
-
+    
     private void Awake()
     {
         if (instance == null)
@@ -70,17 +69,19 @@ public class GameManager : MonoBehaviour
     private void OnLapFinished()
     {
         lapTimeDifference = currentLapTime - prevLapTime;
-        prevLapTimeDifferenceText.text = FormatTime(lapTimeDifference);
 
         if (lapTimeDifference <= 0)
         {
             prevLapTimeDifferenceText.color = Color.green;
+            prevLapTimeDifferenceText.text = "\t        -" + FormatTime(-lapTimeDifference);
         }
         else
         {
             prevLapTimeDifferenceText.color = Color.red;
+            prevLapTimeDifferenceText.text = "\t        +" + FormatTime(lapTimeDifference);
         }
         
+        UIBuffer = 3f;
         currentLap++;
         prevLapTime = currentLapTime;
         
@@ -139,13 +140,16 @@ public class GameManager : MonoBehaviour
     {
         currentLapTime += Time.deltaTime;
         totalRaceTime += Time.deltaTime;
+        UIBuffer = Mathf.Lerp(UIBuffer, 0f, Time.deltaTime);
+        
     }
     
     private void UpdateTimerUI()
     {
-        currentLapTimeText.text = FormatTime(currentLapTime);
-        totalRaceTimeText.text = FormatTime(totalRaceTime);
+        currentLapTimeText.text = "Lap Time: \t" + FormatTime(currentLapTime);
+        totalRaceTimeText.text = "Time: \t" + FormatTime(totalRaceTime);
         lapText.text = "Lap: " + currentLap + "/" + totalLaps;
+        prevLapTimeDifferenceText.alpha = UIBuffer * 85f;
 
         if (raceFinished)
         {
@@ -153,6 +157,7 @@ public class GameManager : MonoBehaviour
             totalRaceTimeText.enabled = false;
             lapText.enabled = false;
             finishText.enabled = true;
+            prevLapTimeDifferenceText.enabled = false;
         }
     }
 
