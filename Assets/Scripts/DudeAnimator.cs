@@ -32,6 +32,7 @@ public class DudeAnimator : MonoBehaviour
 
     void LateUpdate()
     {
+        //all of this is an attempt to make the hips lag behind the movement of the collider to simulate vertical inertia while keeping the feet glued to the board
         scaledYVelocity = capsuleHitboxRB.linearVelocity.y / scale;
 
         if (capsuleHitboxRB.linearVelocity.y < 0)
