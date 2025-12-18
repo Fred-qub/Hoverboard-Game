@@ -74,11 +74,12 @@ public class playerController : MonoBehaviour
         //gets the input, applies a constant force if the key is held, also smoothly adjusts the FOV of the camera
         //also smoothly adjusts the camera FOV back, but faster
         bool boostInput = Input.GetKey(KeyCode.LeftShift);
-        if (boostInput)
+        if (boostInput && boostResource >= 0f)
         {
             isBoosting = true;
             capsuleHitboxRB.AddForce(capsuleHitbox.forward * boostAcceleration, ForceMode.Acceleration);
             cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 130f, Time.deltaTime * 3);
+            boostResource -= Time.deltaTime * 10 ;
         }
         else
         {
@@ -154,7 +155,12 @@ public class playerController : MonoBehaviour
     private void updateBoostUI(float speed)
     {
         speedometerText.text = String.Format("{0:000}", speed) + " M/S";
-        
+
         boostMeter.value = boostResource;
+
+        if (boostResource <= 0)
+        {
+            
+        }
     }
 }
