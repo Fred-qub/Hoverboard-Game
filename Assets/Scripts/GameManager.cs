@@ -22,20 +22,12 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private GameObject comboBufferSliderObject;
     private Slider comboBufferSlider;
-    
     [SerializeField] private TextMeshProUGUI comboBufferText;
-    [SerializeField] private Slider boostMeter;
-    [SerializeField] private TextMeshProUGUI speedometerText;
-    
-    [Header("Player Hitbox RB")]
-    [SerializeField] private Rigidbody capsuleHitboxRB;
-    
-    private float speed = 0f;
+
     
     private int score = 0;
     private int comboMultiplier = 1;
-
-    private float boostResource = 0f;
+    
     
     private int lastCheckpointIndex = -1;
     private int currentLap = 1;
@@ -62,8 +54,6 @@ public class GameManager : MonoBehaviour
         {
             UpdateTimers();
         }
-        
-        speed = capsuleHitboxRB.linearVelocity.magnitude;
         
         UpdateUI();
     }
@@ -202,9 +192,6 @@ public class GameManager : MonoBehaviour
         comboText.text = "COMBO: \tx" + comboMultiplier;
         comboBufferSlider.value = comboBuffer;
         comboBufferText.text = FormatBuffer(comboBuffer);
-        speedometerText.text = String.Format("{0:000}", speed) + " M/S";
-        
-        boostMeter.value = boostResource;
 
         //turns off the UI and enables the FINISH! text when the race ends
         if (raceFinished)

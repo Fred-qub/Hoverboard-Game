@@ -1,6 +1,8 @@
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class playerController : MonoBehaviour
 {
@@ -26,6 +28,13 @@ public class playerController : MonoBehaviour
     public bool grounded = true;
     public float groundedBuffer = 1f;
     public static float coyoteTime = 0.5f;
+    
+    private float boostResource = 100f;
+    public bool isBoosting = false;
+    private float speed = 0f;
+
+    [SerializeField] private Slider boostMeter;
+    [SerializeField] private TextMeshProUGUI speedometerText;
 
     void Start()
     { 
@@ -67,11 +76,13 @@ public class playerController : MonoBehaviour
         bool boostInput = Input.GetKey(KeyCode.LeftShift);
         if (boostInput)
         {
+            isBoosting = true;
             capsuleHitboxRB.AddForce(capsuleHitbox.forward * boostAcceleration, ForceMode.Acceleration);
             cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 130f, Time.deltaTime * 3);
         }
         else
         {
+            isBoosting = false;
             cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 90f, Time.deltaTime * 4);
         }
     }
@@ -93,6 +104,7 @@ public class playerController : MonoBehaviour
         jump();
         boost();
         rotatePlayerToCamera();
+        updateBoostUI(capsuleHitboxRB.linearVelocity.magnitude);
     }
 
     void movement()
@@ -137,5 +149,12 @@ public class playerController : MonoBehaviour
     {
         movement();
         hoveringAndGroundDetection();
+    }
+
+    private void updateBoostUI(float speed)
+    {
+        speedometerText.text = String.Format("{0:000}", speed) + " M/S";
+        
+        boostMeter.value = boostResource;
     }
 }

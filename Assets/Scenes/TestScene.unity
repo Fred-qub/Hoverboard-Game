@@ -5118,9 +5118,6 @@ MonoBehaviour:
   comboText: {fileID: 96500611}
   comboBufferSliderObject: {fileID: 339760876}
   comboBufferText: {fileID: 373114941}
-  boostMeter: {fileID: 1769947419}
-  speedometerText: {fileID: 430449602}
-  capsuleHitboxRB: {fileID: 1896491482158217002}
 --- !u!4 &1203980797
 Transform:
   m_ObjectHideFlags: 0
@@ -8817,6 +8814,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 330585546}
     - target: {fileID: 2469619784333353948, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+      propertyPath: boostMeter
+      value: 
+      objectReference: {fileID: 1769947419}
+    - target: {fileID: 2469619784333353948, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+      propertyPath: speedometerText
+      value: 
+      objectReference: {fileID: 430449602}
+    - target: {fileID: 2469619784333353948, guid: db50a61a00c38ec479e4421af4029829, type: 3}
       propertyPath: boostAcceleration
       value: 5
       objectReference: {fileID: 0}
@@ -8974,11 +8979,6 @@ PrefabInstance:
 --- !u!4 &1896491482158217001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3765738760632236964, guid: db50a61a00c38ec479e4421af4029829, type: 3}
-  m_PrefabInstance: {fileID: 733529431912005179}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1896491482158217002 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 441459562755401926, guid: db50a61a00c38ec479e4421af4029829, type: 3}
   m_PrefabInstance: {fileID: 733529431912005179}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
