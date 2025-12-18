@@ -16,22 +16,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lapText;
     [SerializeField] private TextMeshProUGUI currentLapTimeText;
     [SerializeField] private TextMeshProUGUI prevLapTimeDifferenceText;
-    
     [SerializeField] private TextMeshProUGUI finishText;
-    
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI comboText;
-    [SerializeField] private Slider comboTimerSlider;
-    [SerializeField] private TextMeshProUGUI comboMeterBufferText;
     
+    [SerializeField] private GameObject comboBufferSliderObject;
+    private Slider comboBufferSlider;
+    
+    [SerializeField] private TextMeshProUGUI comboBufferText;
     [SerializeField] private Slider boostMeter;
     [SerializeField] private TextMeshProUGUI speedometerText;
     
+    [Header("Player Hitbox RB")]
+    [SerializeField] private Rigidbody capsuleHitboxRB;
     
-    private int score;
-    private int comboMultiplier;
+    private float speed = 0f;
+    
+    private int score = 0;
+    private int comboMultiplier = 1;
 
-    private float boostResource;
+    private float boostResource = 0f;
     
     private int lastCheckpointIndex = -1;
     private int currentLap = 1;
@@ -45,9 +49,13 @@ public class GameManager : MonoBehaviour
     private float lapTimeDifference = 0f;
 
     private float prevLapTimeDiffTextBuffer = 0f;
-    private float comboBuffer = 0f;
-    private float boostBuffer = 0f;
+    private float comboBuffer = 10f;
 
+    private void Start()
+    {
+        comboBufferSlider = comboBufferSliderObject.GetComponent<Slider>();
+    }
+    
     private void Update()
     {
         if (raceStarted)
@@ -55,7 +63,9 @@ public class GameManager : MonoBehaviour
             UpdateTimers();
         }
         
-        UpdateTimerUI();
+        speed = capsuleHitboxRB.linearVelocity.magnitude;
+        
+        UpdateUI();
     }
     
     private void Awake()
@@ -177,18 +187,24 @@ public class GameManager : MonoBehaviour
         totalRaceTime += Time.deltaTime;
         prevLapTimeDiffTextBuffer = Mathf.Lerp(prevLapTimeDiffTextBuffer, 0f, Time.deltaTime);
         comboBuffer -= Time.deltaTime;
-        boostBuffer -= Time.deltaTime;
         
     }
     
-    private void UpdateTimerUI()
+    private void UpdateUI()
     {
         //sets the UI text to the correct values
         currentLapTimeText.text = "Lap Time: \t" + FormatTime(currentLapTime);
         totalRaceTimeText.text = "Time: \t" + FormatTime(totalRaceTime);
         lapText.text = "Lap: " + currentLap + "/" + totalLaps;
         prevLapTimeDifferenceText.alpha = prevLapTimeDiffTextBuffer * 85f;
+
+        scoreText.text = "Score: \t" + String.Format("{0:0000000}", score);
+        comboText.text = "COMBO: \tx" + comboMultiplier;
+        comboBufferSlider.value = comboBuffer;
+        comboBufferText.text = FormatBuffer(comboBuffer);
+        speedometerText.text = String.Format("{0:000}", speed) + " M/S";
         
+        boostMeter.value = boostResource;
 
         //turns off the UI and enables the FINISH! text when the race ends
         if (raceFinished)
@@ -199,6 +215,18 @@ public class GameManager : MonoBehaviour
             finishText.enabled = true;
             prevLapTimeDifferenceText.enabled = false;
         }
+
+        if (comboBuffer <= 0)
+        {
+            comboBufferText.enabled = false;
+            comboBufferSliderObject.SetActive(false);
+        }
+        else
+        {
+            comboBufferText.enabled = true;
+            comboBufferSliderObject.SetActive(true);
+        }
+
     }
 
     private string FormatTime(float time)
@@ -212,12 +240,10 @@ public class GameManager : MonoBehaviour
         return string.Format("{0:00}:{1:00.00}", minutes, seconds);
     }
 
-    private string FormatCountdown(float time)
+    private string FormatBuffer(float time)
     {
         if (float.IsInfinity(time) || float.IsNaN(time)) return "--.--";
         
-        float seconds = time % 60;
-        
-        return string.Format("{00.00}", seconds);
+        return string.Format("{0:00.00}", time);
     }
 }

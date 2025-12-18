@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 339760877}
   - component: {fileID: 339760878}
   m_Layer: 5
-  m_Name: Combo Meter
+  m_Name: Combo Buffer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 98149485}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -1452,10 +1452,10 @@ RectTransform:
   - {fileID: 1097218111}
   m_Father: {fileID: 1769947418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchorMin: {x: 0.25, y: 0}
+  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &370140924
 PrefabInstance:
@@ -1526,7 +1526,7 @@ GameObject:
   - component: {fileID: 373114942}
   - component: {fileID: 373114941}
   m_Layer: 5
-  m_Name: Combo Timer Text
+  m_Name: Combo Buffer Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1919,7 +1919,7 @@ GameObject:
   - component: {fileID: 430449603}
   - component: {fileID: 430449602}
   m_Layer: 5
-  m_Name: Speed Number
+  m_Name: Speedometer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 M/S
+  m_text: 000 M/S
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3881,8 +3881,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1769947418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchorMin: {x: 0.25, y: 0}
+  m_AnchorMax: {x: 0.75, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4140,7 +4140,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &937587311
 MonoBehaviour:
@@ -4473,16 +4473,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045878555}
-  m_LocalRotation: {x: -0, y: 0.4027466, z: -0, w: 0.9153116}
+  m_LocalRotation: {x: 0.28478494, y: 0.28478494, z: 0.64722294, w: 0.64722294}
   m_LocalPosition: {x: 0, y: 0, z: -294.9109}
   m_LocalScale: {x: 0.5400001, y: 0.54, z: 0.5400001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 443576030}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 47.5, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141.6, y: -265.85}
+  m_AnchoredPosition: {x: 378.16, y: -139.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1045878557
@@ -4619,7 +4619,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 0}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097218112
 MonoBehaviour:
@@ -5114,12 +5114,13 @@ MonoBehaviour:
   currentLapTimeText: {fileID: 403762434}
   prevLapTimeDifferenceText: {fileID: 1450573232}
   finishText: {fileID: 687938882}
-  scoreText: {fileID: 0}
-  comboText: {fileID: 0}
-  comboMeter: {fileID: 0}
-  comboMeterBufferText: {fileID: 0}
-  boostMeter: {fileID: 0}
-  speedometerText: {fileID: 0}
+  scoreText: {fileID: 1302420283}
+  comboText: {fileID: 96500611}
+  comboBufferSliderObject: {fileID: 339760876}
+  comboBufferText: {fileID: 373114941}
+  boostMeter: {fileID: 1769947419}
+  speedometerText: {fileID: 430449602}
+  capsuleHitboxRB: {fileID: 1896491482158217002}
 --- !u!4 &1203980797
 Transform:
   m_ObjectHideFlags: 0
@@ -5469,7 +5470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 270.2361, y: 250}
+  m_AnchoredPosition: {x: 131.97, y: 250}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1302420283
@@ -5526,7 +5527,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 18
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -7046,7 +7047,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1674512264
 GameObject:
@@ -7275,8 +7276,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 292.59, y: -245}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 505.8, y: 4.3}
+  m_SizeDelta: {x: 20, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1769947419
 MonoBehaviour:
@@ -7321,9 +7322,9 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 937587311}
   m_FillRect: {fileID: 1097218111}
   m_HandleRect: {fileID: 937587310}
-  m_Direction: 0
+  m_Direction: 2
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -8973,6 +8974,11 @@ PrefabInstance:
 --- !u!4 &1896491482158217001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3765738760632236964, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+  m_PrefabInstance: {fileID: 733529431912005179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1896491482158217002 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 441459562755401926, guid: db50a61a00c38ec479e4421af4029829, type: 3}
   m_PrefabInstance: {fileID: 733529431912005179}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
