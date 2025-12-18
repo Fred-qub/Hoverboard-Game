@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lapText;
     [SerializeField] private TextMeshProUGUI currentLapTimeText;
     [SerializeField] private TextMeshProUGUI prevLapTimeDifferenceText;
+    
     [SerializeField] private TextMeshProUGUI finishText;
+    
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI comboText;
+    [SerializeField] private Slider comboTimerSlider;
+    [SerializeField] private TextMeshProUGUI comboMeterBufferText;
+    
+    [SerializeField] private Slider boostMeter;
+    [SerializeField] private TextMeshProUGUI speedometerText;
+    
+    
+    private int score;
+    private int comboMultiplier;
+
+    private float boostResource;
     
     private int lastCheckpointIndex = -1;
     private int currentLap = 1;
@@ -28,7 +44,9 @@ public class GameManager : MonoBehaviour
     private float prevLapTime = 0f;
     private float lapTimeDifference = 0f;
 
-    private float UIBuffer = 0f;
+    private float prevLapTimeDiffTextBuffer = 0f;
+    private float comboBuffer = 0f;
+    private float boostBuffer = 0f;
 
     private void Update()
     {
@@ -58,7 +76,7 @@ public class GameManager : MonoBehaviour
         //starts the race, but makes sure it isn't finished either
         raceStarted = true;
         raceFinished = false;
-        Debug.Log("Race started");
+        //Debug.Log("Race started");
     }
 
     private void EndRace()
@@ -66,7 +84,7 @@ public class GameManager : MonoBehaviour
         //This is probably doesn't need an explanation
         raceStarted = false;
         raceFinished = true;
-        Debug.Log("Race finished");
+        //Debug.Log("Race finished");
     }
     
     private void OnLapFinished()
@@ -90,11 +108,11 @@ public class GameManager : MonoBehaviour
         //sets how long the lap time difference text stays on screen for before fading
         //increments the lap
         //updates the previous lap time
-        UIBuffer = 3f;
+        prevLapTimeDiffTextBuffer = 3f;
         currentLap++;
         prevLapTime = currentLapTime;
         
-        Debug.Log("Lap " + currentLap + "/" + totalLaps);
+        //Debug.Log("Lap " + currentLap + "/" + totalLaps);
         
         //ends the race when the total number of laps is exceeded, or resets the current lap time when starting a new lap
         if (currentLap > totalLaps)
@@ -120,7 +138,7 @@ public class GameManager : MonoBehaviour
             
             else if (lastCheckpointIndex == checkpoints.Length - 1)
             {
-                Debug.Log("Lap completed");
+                //Debug.Log("Lap completed");
                 OnLapFinished();
             }
         }
@@ -128,7 +146,7 @@ public class GameManager : MonoBehaviour
 
         //sets the last checkpoint you passed
         lastCheckpointIndex = checkpointIndex;
-        Debug.Log("The last checkpoint is now " + lastCheckpointIndex);
+        //Debug.Log("The last checkpoint is now " + lastCheckpointIndex);
     }
 
     public void CheckpointPassed(int checkpointIndex)
@@ -143,12 +161,12 @@ public class GameManager : MonoBehaviour
         //otherwise you somehow missed one or went backwards, idiot
         if ((checkpointIndex == lastCheckpointIndex + 1) || (checkpointIndex == 0 && lastCheckpointIndex == checkpoints.Length - 1))
         {
-            Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is correct");
+            //Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is correct");
             UpdateCheckpoint(checkpointIndex);
         }
         else
         {
-            Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is wrong");
+            //Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is wrong");
         }
     }
 
@@ -157,7 +175,9 @@ public class GameManager : MonoBehaviour
         //makes the timers tick and makes the UI buffer that controls that lap time difference text from earlier tick down
         currentLapTime += Time.deltaTime;
         totalRaceTime += Time.deltaTime;
-        UIBuffer = Mathf.Lerp(UIBuffer, 0f, Time.deltaTime);
+        prevLapTimeDiffTextBuffer = Mathf.Lerp(prevLapTimeDiffTextBuffer, 0f, Time.deltaTime);
+        comboBuffer -= Time.deltaTime;
+        boostBuffer -= Time.deltaTime;
         
     }
     
@@ -167,7 +187,8 @@ public class GameManager : MonoBehaviour
         currentLapTimeText.text = "Lap Time: \t" + FormatTime(currentLapTime);
         totalRaceTimeText.text = "Time: \t" + FormatTime(totalRaceTime);
         lapText.text = "Lap: " + currentLap + "/" + totalLaps;
-        prevLapTimeDifferenceText.alpha = UIBuffer * 85f;
+        prevLapTimeDifferenceText.alpha = prevLapTimeDiffTextBuffer * 85f;
+        
 
         //turns off the UI and enables the FINISH! text when the race ends
         if (raceFinished)
@@ -183,11 +204,20 @@ public class GameManager : MonoBehaviour
     private string FormatTime(float time)
     {
         //formats the time to minutes:seconds.milliseconds
-        if (float.IsInfinity(time) || float.IsNaN(time)) return "--:--.---";
+        if (float.IsInfinity(time) || float.IsNaN(time)) return "--:--.--";
         
         int minutes = (int)time / 60;
         float seconds = time % 60;
         
         return string.Format("{0:00}:{1:00.00}", minutes, seconds);
+    }
+
+    private string FormatCountdown(float time)
+    {
+        if (float.IsInfinity(time) || float.IsNaN(time)) return "--.--";
+        
+        float seconds = time % 60;
+        
+        return string.Format("{00.00}", seconds);
     }
 }
