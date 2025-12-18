@@ -35,6 +35,7 @@ public class playerController : MonoBehaviour
 
     [SerializeField] private Slider boostMeter;
     [SerializeField] private TextMeshProUGUI speedometerText;
+    [SerializeField] private Image boostMeterColour;
 
     void Start()
     { 
@@ -49,7 +50,7 @@ public class playerController : MonoBehaviour
         
         //assigns the player hitbox position and rigidbody
         capsuleHitbox = transform.Find("capsuleHitbox").transform;
-        capsuleHitboxRB = capsuleHitbox.GetComponent<Rigidbody>();  
+        capsuleHitboxRB = capsuleHitbox.GetComponent<Rigidbody>();
     }
 
     void groundedCountdown()
@@ -160,7 +161,11 @@ public class playerController : MonoBehaviour
 
         if (boostResource <= 0)
         {
-            
+            boostMeterColour.color = Color.red;
+        }
+        else
+        {
+            boostMeterColour.color = Color.cornflowerBlue;
         }
     }
 }
