@@ -248,10 +248,8 @@ public class GameManager : MonoBehaviour
             finishText.enabled = true;
             
             currentLapTimeText.enabled = false;
-            totalRaceTimeText.enabled = false;
             lapText.enabled = false;
             prevLapTimeDifferenceText.enabled = false;
-            scoreText.enabled = false;
             comboText.enabled = false;
             comboBufferSliderObject.SetActive(false);
             comboBufferText.enabled = false;
