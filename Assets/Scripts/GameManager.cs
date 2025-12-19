@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
         currentLapTime += Time.deltaTime;
         totalRaceTime += Time.deltaTime;
         prevLapTimeDiffTextBuffer = Mathf.Lerp(prevLapTimeDiffTextBuffer, 0f, Time.deltaTime);
+        trickScoreIncreaseTextBuffer -= Time.deltaTime;
         
         comboBuffer -= Time.deltaTime;
         
@@ -223,6 +224,14 @@ public class GameManager : MonoBehaviour
             comboBufferSliderObject.SetActive(true);
         }
 
+        if (trickScoreIncreaseTextBuffer <= 0)
+        {
+            trickScoreIncreaseText.enabled = false;
+        }
+        else
+        {
+            trickScoreIncreaseText.enabled = true;
+        }
     }
 
     public void addComboChain()
@@ -255,8 +264,11 @@ public class GameManager : MonoBehaviour
         {
             airTimeMultiplier = airTimeMultiplier * -1;
         }
-        
-        score += airTimeMultiplier * comboMultiplier;
+
+        int trickScore = airTimeMultiplier * comboMultiplier;
+        trickScoreIncreaseText.text = "Air Trick: +" + trickScore;
+        trickScoreIncreaseTextBuffer = 1f;
+        score += trickScore;
     }
     
     private string FormatTime(float time)
