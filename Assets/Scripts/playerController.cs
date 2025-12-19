@@ -45,6 +45,8 @@ public class playerController : MonoBehaviour
     [SerializeField] private GameObject trickText;
     private float trickCooldown = 0.5f;
 
+    public Image boostVFX;
+
     private void Awake()
     {
         //singleton stuff
@@ -130,6 +132,7 @@ public class playerController : MonoBehaviour
 
     void boost()
     {
+        Color boostVFXColor = Color.white;
         //gets the input, applies a constant force if the key is held, also smoothly adjusts the FOV of the camera
         //also smoothly adjusts the camera FOV back, but faster
         bool boostInput = Input.GetKey(KeyCode.LeftShift);
@@ -139,11 +142,17 @@ public class playerController : MonoBehaviour
             capsuleHitboxRB.AddForce(capsuleHitbox.forward * boostAcceleration, ForceMode.Acceleration);
             cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 130f, Time.deltaTime * 3);
             boostResource -= Time.deltaTime * 10 ;
+            
+            
+            boostVFXColor.a = Mathf.Lerp(boostVFX.color.a, 1f, Time.deltaTime * 3f);
+            boostVFX.color = boostVFXColor;
         }
         else
         {
             isBoosting = false;
             cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 90f, Time.deltaTime * 4);
+            boostVFXColor.a = Mathf.Lerp(boostVFX.color.a, 0f, Time.deltaTime * 4f);
+            boostVFX.color = boostVFXColor;
         }
     }
 

@@ -47,6 +47,10 @@ public class GameManager : MonoBehaviour
     private float prevLapTime = 0f;
     private float lapTimeDifference = 0f;
 
+    private float lapTime1 = 0f;
+    private float lapTime2 = 0f;
+    private float lapTime3 = 0f;
+
     private float prevLapTimeDiffTextBuffer = 0f;
     private float comboBuffer = 0f;
     private float trickScoreIncreaseTextBuffer = 0f;
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour
     
     private void Update()
     {
-        if (raceStarted)
+        if (raceStarted && !raceFinished)
         {
             UpdateTimers();
         }
@@ -98,6 +102,16 @@ public class GameManager : MonoBehaviour
     
     private void OnLapFinished()
     {
+        switch (currentLap)
+        {
+            case 1: lapTime1 = currentLapTime; break;
+            case 2: lapTime2 = currentLapTime; break;
+            case 3: lapTime3 = currentLapTime; break;
+        }
+        Debug.Log(lapTime1);
+        Debug.Log(lapTime2);
+        Debug.Log(lapTime3);
+        
         //calculates how much faster (or slower, skill issue) that lap you just finished was compared to the last one
         lapTimeDifference = currentLapTime - prevLapTime;
 
@@ -236,26 +250,26 @@ public class GameManager : MonoBehaviour
         if (raceStarted)
         {
             startText.enabled = false;
-        }
+            
+            if (comboBuffer <= 0)
+            {
+                comboBufferText.enabled = false;
+                comboBufferSliderObject.SetActive(false);
+            }
+            else
+            {
+                comboBufferText.enabled = true;
+                comboBufferSliderObject.SetActive(true);
+            }
 
-        if (comboBuffer <= 0)
-        {
-            comboBufferText.enabled = false;
-            comboBufferSliderObject.SetActive(false);
-        }
-        else
-        {
-            comboBufferText.enabled = true;
-            comboBufferSliderObject.SetActive(true);
-        }
-
-        if (trickScoreIncreaseTextBuffer <= 0)
-        {
-            trickScoreIncreaseText.enabled = false;
-        }
-        else
-        {
-            trickScoreIncreaseText.enabled = true;
+            if (trickScoreIncreaseTextBuffer <= 0)
+            {
+                trickScoreIncreaseText.enabled = false;
+            }
+            else
+            {
+                trickScoreIncreaseText.enabled = true;
+            }
         }
     }
 
