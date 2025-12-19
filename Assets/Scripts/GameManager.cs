@@ -1,8 +1,8 @@
 using System;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI comboText;
     [SerializeField] private TextMeshProUGUI startText;
+    [SerializeField] private GameObject menuReturn;
     
     [SerializeField] private GameObject comboBufferSliderObject;
     private Slider comboSlider;
@@ -54,17 +55,26 @@ public class GameManager : MonoBehaviour
     private float prevLapTimeDiffTextBuffer = 0f;
     private float comboBuffer = 0f;
     private float trickScoreIncreaseTextBuffer = 0f;
+    
 
     private void Start()
     {
         comboSlider = comboBufferSliderObject.GetComponent<Slider>();
     }
     
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+    
     private void Update()
     {
-        if (raceStarted && !raceFinished)
+        if (!raceFinished)
         {
-            UpdateTimers();
+            if (raceStarted)
+            {
+                UpdateTimers();
+            }
         }
         
         UpdateCombo();
@@ -98,6 +108,11 @@ public class GameManager : MonoBehaviour
         raceStarted = false;
         raceFinished = true;
         //Debug.Log("Race finished");
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
+        menuReturn.SetActive(true);
     }
     
     private void OnLapFinished()
