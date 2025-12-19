@@ -111,9 +111,14 @@ public class playerController : MonoBehaviour
         trickCooldown = 0.5f;
         trickText.SetActive(true);
 
-        if (boostResource < 95)
-        { 
-            boostResource += 5;
+        addBoostResource(5f);
+    }
+
+    public void addBoostResource(float amount)
+    {
+        if (boostResource <= (100 - amount))
+        {
+            boostResource += amount;
         }
     }
 
