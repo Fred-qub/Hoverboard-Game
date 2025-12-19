@@ -37,6 +37,9 @@ public class playerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speedometerText;
     [SerializeField] private Image boostMeterColour;
 
+    [SerializeField] private GameObject trickText;
+    private float trickCooldown = 1f;
+
     void Start()
     { 
         //locks and hides mouse cursor
@@ -60,14 +63,36 @@ public class playerController : MonoBehaviour
         grounded = groundedBuffer >= 0f;
     }
 
+    void trickCountdown()
+    {
+        trickCooldown = (trickCooldown - Time.deltaTime);
+        if (trickCooldown <= 0f)
+        {
+            trickText.SetActive(false);
+        }
+    }
+
     void jump()
     {
         //gets the input, performs a jump if the player is grounded
         bool jumpInput = Input.GetButtonDown("Jump");
-        if (jumpInput  && grounded)
+        if (jumpInput)
         {
-            capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
+            if (grounded)
+            {
+                capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
+            }
+            else if (trickCooldown <= 0f)
+            {
+                airTrick();
+            }
         } 
+    }
+
+    void airTrick()
+    {
+        trickCooldown = 1f;
+        trickText.SetActive(true);
     }
 
     void boost()
@@ -103,6 +128,7 @@ public class playerController : MonoBehaviour
     void Update()
     {
         groundedCountdown();
+        trickCountdown();
         jump();
         boost();
         rotatePlayerToCamera();
