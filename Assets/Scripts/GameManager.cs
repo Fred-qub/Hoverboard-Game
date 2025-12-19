@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI finishText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI comboText;
+    [SerializeField] private TextMeshProUGUI startText;
     
     [SerializeField] private GameObject comboBufferSliderObject;
     private Slider comboSlider;
@@ -215,11 +216,26 @@ public class GameManager : MonoBehaviour
         //turns off the UI and enables the FINISH! text when the race ends
         if (raceFinished)
         {
+            finishText.enabled = true;
+            
             currentLapTimeText.enabled = false;
             totalRaceTimeText.enabled = false;
             lapText.enabled = false;
-            finishText.enabled = true;
             prevLapTimeDifferenceText.enabled = false;
+            scoreText.enabled = false;
+            comboText.enabled = false;
+            comboBufferSliderObject.SetActive(false);
+            comboBufferText.enabled = false;
+            comboChainText.enabled = false;
+            trickScoreIncreaseText.enabled = false;
+            playerController.instance.boostText.enabled = false;
+            playerController.instance.speedometerText.enabled = false;
+            playerController.instance.boostMeterObject.SetActive(false);
+        }
+
+        if (raceStarted)
+        {
+            startText.enabled = false;
         }
 
         if (comboBuffer <= 0)

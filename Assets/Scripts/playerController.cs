@@ -35,10 +35,12 @@ public class playerController : MonoBehaviour
     public bool isBoosting = false;
     private float speed = 0f;
 
-    [SerializeField] private Slider boostMeter;
-    [SerializeField] private TextMeshProUGUI speedometerText;
+    public GameObject boostMeterObject;
+    public Slider boostMeter;
+    public TextMeshProUGUI speedometerText;
     [SerializeField] private Image boostMeterColour;
     private float boostMeterHue = 0f;
+    public TextMeshProUGUI boostText;
 
     [SerializeField] private GameObject trickText;
     private float trickCooldown = 0.5f;
