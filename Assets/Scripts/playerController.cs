@@ -38,9 +38,10 @@ public class playerController : MonoBehaviour
     [SerializeField] private Slider boostMeter;
     [SerializeField] private TextMeshProUGUI speedometerText;
     [SerializeField] private Image boostMeterColour;
+    private float boostMeterHue = 0f;
 
     [SerializeField] private GameObject trickText;
-    private float trickCooldown = 1f;
+    private float trickCooldown = 0.5f;
 
     private void Awake()
     {
@@ -107,8 +108,13 @@ public class playerController : MonoBehaviour
     void airTrick()
     {
         GameManager.instance.addComboChain();
-        trickCooldown = 1f;
+        trickCooldown = 0.5f;
         trickText.SetActive(true);
+
+        if (boostResource < 95)
+        { 
+            boostResource += 5;
+        }
     }
 
     void boost()
@@ -200,14 +206,18 @@ public class playerController : MonoBehaviour
         speedometerText.text = String.Format("{0:000}", speed) + " M/S";
 
         boostMeter.value = boostResource;
+        
+        boostMeterHue = (boostMeterHue + 0.001f) % 1f;
 
+        Color fromHSV = Color.HSVToRGB(boostMeterHue, 1f, 1f);
+        
         if (boostResource <= 0)
         {
             boostMeterColour.color = Color.red;
         }
         else
         {
-            boostMeterColour.color = Color.cornflowerBlue;
+            boostMeterColour.color = fromHSV;
         }
     }
 }

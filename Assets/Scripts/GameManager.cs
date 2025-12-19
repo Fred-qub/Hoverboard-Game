@@ -259,15 +259,15 @@ public class GameManager : MonoBehaviour
 
     private void addScore()
     {
-        int airTimeMultiplier = Mathf.RoundToInt(playerController.instance.groundedBuffer) * 2;
+        int airTimeMultiplier = Mathf.RoundToInt(playerController.instance.groundedBuffer) * 3;
         if (airTimeMultiplier < 0)
         {
             airTimeMultiplier = airTimeMultiplier * -1;
         }
 
-        int trickScore = airTimeMultiplier * comboMultiplier;
+        int trickScore = 1 + (airTimeMultiplier * comboMultiplier);
         trickScoreIncreaseText.text = "Air Trick: +" + trickScore;
-        trickScoreIncreaseTextBuffer = 1f;
+        trickScoreIncreaseTextBuffer = 0.5f;
         score += trickScore;
     }
     
