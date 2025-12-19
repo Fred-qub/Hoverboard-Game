@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     [SerializeField] private Checkpoint[] checkpoints;
     [SerializeField] private int totalLaps = 3;
+    [SerializeField] private GameObject[] boostCapsules;
     
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI totalRaceTimeText;
@@ -119,7 +120,7 @@ public class GameManager : MonoBehaviour
         currentLap++;
         prevLapTime = currentLapTime;
         
-        //Debug.Log("Lap " + currentLap + "/" + totalLaps);
+        respawnBoostCapsules();
         
         //ends the race when the total number of laps is exceeded, or resets the current lap time when starting a new lap
         if (currentLap > totalLaps)
@@ -174,6 +175,14 @@ public class GameManager : MonoBehaviour
         else
         {
             //Debug.Log("Last checkpoint was " + lastCheckpointIndex + ", so this is wrong");
+        }
+    }
+
+    private void respawnBoostCapsules()
+    {
+        foreach (GameObject boostCapsule in boostCapsules)
+        {
+            boostCapsule.SetActive(true);
         }
     }
 
