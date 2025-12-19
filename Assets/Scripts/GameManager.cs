@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,12 +22,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI comboText;
     
     [SerializeField] private GameObject comboBufferSliderObject;
-    private Slider comboBufferSlider;
+    private Slider comboSlider;
     [SerializeField] private TextMeshProUGUI comboBufferText;
+    [SerializeField] private TextMeshProUGUI comboChainText;
+    [SerializeField] private TextMeshProUGUI trickScoreIncreaseText;
 
     
     private int score = 0;
     private int comboMultiplier = 1;
+    private int comboChain = 0;
+    private int comboGaugeInt = 0;
     
     
     private int lastCheckpointIndex = -1;
@@ -41,11 +46,12 @@ public class GameManager : MonoBehaviour
     private float lapTimeDifference = 0f;
 
     private float prevLapTimeDiffTextBuffer = 0f;
-    private float comboBuffer = 10f;
+    private float comboBuffer = 0f;
+    private float trickScoreIncreaseTextBuffer = 0f;
 
     private void Start()
     {
-        comboBufferSlider = comboBufferSliderObject.GetComponent<Slider>();
+        comboSlider = comboBufferSliderObject.GetComponent<Slider>();
     }
     
     private void Update()
@@ -55,6 +61,7 @@ public class GameManager : MonoBehaviour
             UpdateTimers();
         }
         
+        UpdateCombo();
         UpdateUI();
     }
     
@@ -176,6 +183,7 @@ public class GameManager : MonoBehaviour
         currentLapTime += Time.deltaTime;
         totalRaceTime += Time.deltaTime;
         prevLapTimeDiffTextBuffer = Mathf.Lerp(prevLapTimeDiffTextBuffer, 0f, Time.deltaTime);
+        
         comboBuffer -= Time.deltaTime;
         
     }
@@ -189,8 +197,9 @@ public class GameManager : MonoBehaviour
         prevLapTimeDifferenceText.alpha = prevLapTimeDiffTextBuffer * 85f;
 
         scoreText.text = "Score: \t" + String.Format("{0:0000000}", score);
+        comboChainText.text = "" + comboChain;
         comboText.text = "COMBO: \tx" + comboMultiplier;
-        comboBufferSlider.value = comboBuffer;
+        comboSlider.value = comboGaugeInt;
         comboBufferText.text = FormatBuffer(comboBuffer);
 
         //turns off the UI and enables the FINISH! text when the race ends
@@ -216,6 +225,40 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void addComboChain()
+    {
+        comboBuffer = 5f;
+        comboChain += 1;
+        comboGaugeInt += 1;
+        if (comboChain % 10 == 0)
+        {
+            comboMultiplier++;
+            comboGaugeInt = 0;
+        }
+        addScore();
+    }
+
+    private void UpdateCombo()
+    {
+        if (comboBuffer <= 0)
+        {
+            comboChain = 0;
+            comboGaugeInt = 0;
+            comboMultiplier = 1;
+        }
+    }
+
+    private void addScore()
+    {
+        int airTimeMultiplier = Mathf.RoundToInt(playerController.instance.groundedBuffer) * 2;
+        if (airTimeMultiplier < 0)
+        {
+            airTimeMultiplier = airTimeMultiplier * -1;
+        }
+        
+        score += airTimeMultiplier * comboMultiplier;
+    }
+    
     private string FormatTime(float time)
     {
         //formats the time to minutes:seconds.milliseconds

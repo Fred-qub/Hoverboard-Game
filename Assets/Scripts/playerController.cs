@@ -6,6 +6,8 @@ using System;
 
 public class playerController : MonoBehaviour
 {
+    public static playerController instance;
+    
     public Transform orientation;
     public Transform camPosition;
     public GameObject playerCam;
@@ -40,6 +42,19 @@ public class playerController : MonoBehaviour
     [SerializeField] private GameObject trickText;
     private float trickCooldown = 1f;
 
+    private void Awake()
+    {
+        //singleton stuff
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     void Start()
     { 
         //locks and hides mouse cursor
@@ -91,6 +106,7 @@ public class playerController : MonoBehaviour
 
     void airTrick()
     {
+        GameManager.instance.addComboChain();
         trickCooldown = 1f;
         trickText.SetActive(true);
     }
