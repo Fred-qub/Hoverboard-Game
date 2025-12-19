@@ -2371,21 +2371,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3736036788408967883, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 305926734}
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
---- !u!1 &305926733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3736036788408967883, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
-  m_PrefabInstance: {fileID: 305926732}
-  m_PrefabAsset: {fileID: 0}
---- !u!33 &305926734
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305926733}
-  m_Mesh: {fileID: 0}
 --- !u!1 &310087777
 GameObject:
   m_ObjectHideFlags: 0
@@ -9513,8 +9500,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11341,21 +11328,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3736036788408967883, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1466769004}
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
---- !u!1 &1466769003 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3736036788408967883, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
-  m_PrefabInstance: {fileID: 1466769002}
-  m_PrefabAsset: {fileID: 0}
---- !u!33 &1466769004
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466769003}
-  m_Mesh: {fileID: 0}
 --- !u!4 &1476410913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8976198729105931978, guid: c3253de559dbd5d41a0ca231bc00a784, type: 3}
@@ -15008,7 +14982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: /// PASS THE GREEN CUBE TO START ///
+  m_text: /// PASS THE GREEN FINISH LINE TO START ///
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16565,21 +16539,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3736036788408967883, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2084908552}
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
---- !u!1 &2084908551 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3736036788408967883, guid: 075f6458152838c44a13da9a49ba2710, type: 3}
-  m_PrefabInstance: {fileID: 2084908550}
-  m_PrefabAsset: {fileID: 0}
---- !u!33 &2084908552
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084908551}
-  m_Mesh: {fileID: 0}
 --- !u!1 &2121876277
 GameObject:
   m_ObjectHideFlags: 0
