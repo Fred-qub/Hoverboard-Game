@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
 
     private void respawnBoostCapsules()
     {
+        //does what it says it does
         foreach (GameObject boostCapsule in boostCapsules)
         {
             boostCapsule.SetActive(true);
@@ -264,6 +265,7 @@ public class GameManager : MonoBehaviour
         {
             startText.enabled = false;
             
+            //this stuff looks ugly
             if (comboBuffer <= 0)
             {
                 comboBufferText.enabled = false;
@@ -288,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     public void addComboChain()
     {
+        //fills up the combo meter, at 10 it increases the combo multiplier then resets
         comboBuffer = 5f;
         comboChain += 1;
         comboGaugeInt += 1;
@@ -301,6 +304,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateCombo()
     {
+        //if the combo buffer drops below zero, reset the combo
+        //kina pointless making another tiny function and calling that resetCombo though
         if (comboBuffer <= 0)
         {
             comboChain = 0;
@@ -311,6 +316,7 @@ public class GameManager : MonoBehaviour
 
     private void addScore()
     {
+        //adds more score depending on how long the player has been airborne
         int airTimeMultiplier = Mathf.RoundToInt(playerController.instance.groundedBuffer) * 3;
         if (airTimeMultiplier < 0)
         {
@@ -336,6 +342,7 @@ public class GameManager : MonoBehaviour
 
     private string FormatBuffer(float time)
     {
+        //formats the time to seconds.milliseconds
         if (float.IsInfinity(time) || float.IsNaN(time)) return "--.--";
         
         return string.Format("{0:00.00}", time);

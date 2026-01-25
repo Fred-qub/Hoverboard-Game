@@ -6,16 +6,20 @@ using System;
 
 public class playerController : MonoBehaviour
 {
+    //singleton stuff, makes sure there's only one player
     public static playerController instance;
     
+    //references for character control and camera stuff
     public Transform orientation;
     public Transform camPosition;
     public GameObject playerCam;
     public CinemachineCamera cinemachineCamera;
     
+    //references for rigidbody for physics stuff
     public Transform capsuleHitbox;
     public Rigidbody capsuleHitboxRB;
 
+    //values for movement physics
     public float acceleration;
     public float strafeAcceleration;
     public float turnSpeed;
@@ -27,14 +31,17 @@ public class playerController : MonoBehaviour
     public float hoverStrength;
     public float springDampener;
 
+    //variables for ground detection
     public bool grounded = true;
     public float groundedBuffer = 1f;
     public static float coyoteTime = 0.5f;
     
+    //variables for boosting
     private float boostResource = 100f;
     public bool isBoosting = false;
     private float speed = 0f;
 
+    //values and references for UI stuff
     public GameObject boostMeterObject;
     public Slider boostMeter;
     public TextMeshProUGUI speedometerText;
@@ -120,6 +127,7 @@ public class playerController : MonoBehaviour
 
     public void addBoostResource(float amount)
     {
+        //adds boost resource but never enough to exceed the maximum
         if (boostResource <= (100 - amount))
         {
             boostResource += amount;
@@ -135,6 +143,7 @@ public class playerController : MonoBehaviour
         Color boostVFXColor = Color.white;
         //gets the input, applies a constant force if the key is held, also smoothly adjusts the FOV of the camera
         //also smoothly adjusts the camera FOV back, but faster
+        //also increases/decreases the alpha value of the boost VFX
         bool boostInput = Input.GetKey(KeyCode.LeftShift);
         if (boostInput && boostResource >= 0f)
         {
@@ -142,7 +151,6 @@ public class playerController : MonoBehaviour
             capsuleHitboxRB.AddForce(capsuleHitbox.forward * boostAcceleration, ForceMode.Acceleration);
             cinemachineCamera.Lens.FieldOfView = Mathf.Lerp(cinemachineCamera.Lens.FieldOfView, 130f, Time.deltaTime * 3);
             boostResource -= Time.deltaTime * 10 ;
-            
             
             boostVFXColor.a = Mathf.Lerp(boostVFX.color.a, 1f, Time.deltaTime * 3f);
             boostVFX.color = boostVFXColor;
@@ -159,7 +167,7 @@ public class playerController : MonoBehaviour
     void rotatePlayerToCamera()
     {
         //creates a new vector that represents the direction from the camera to the player, ignoring the Y axis,
-        //uses the empty orientation gameobject's transform's forward vectore to store this direction,
+        //uses the empty orientation gameobject's transform's forward vector to store this direction,
         //then smoothly adjusts the forward vector of the player's transform to rotate the player.
         //currently is slow after building and running on slower machines needs fixed
         Vector3 camDirection = capsuleHitbox.position - new Vector3(camPosition.position.x, capsuleHitbox.position.y, camPosition.position.z);
@@ -169,6 +177,7 @@ public class playerController : MonoBehaviour
     
     void Update()
     {
+        //updates all the things
         groundedCountdown();
         trickCountdown();
         jump();
@@ -217,22 +226,27 @@ public class playerController : MonoBehaviour
     
     void FixedUpdate()
     {
+        //has to be here for physics reasons
         movement();
         hoveringAndGroundDetection();
     }
 
     private void updateBoostUI(float speed)
     {
+        //updates the speedometer in the correct format
         speedometerText.text = String.Format("{0:000}", speed) + " M/S";
 
+        //updates the boost meter
         boostMeter.value = boostResource;
         
+        //changes the boost meter's colour to make it RGB like the boost VFX
         boostMeterHue = (boostMeterHue + 0.001f) % 1f;
 
         Color fromHSV = Color.HSVToRGB(boostMeterHue, 1f, 1f);
         
         if (boostResource <= 0)
         {
+            //makes the boost meter red if it's empty
             boostMeterColour.color = Color.red;
         }
         else

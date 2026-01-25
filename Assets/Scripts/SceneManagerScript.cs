@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerScript : MonoBehaviour
 {
+    //this all controls the main menu UI and uses it to switch scenes
     public GameObject titlePanel;
     public GameObject controlGuidePanel;
     public GameObject scoreBoardPanel;

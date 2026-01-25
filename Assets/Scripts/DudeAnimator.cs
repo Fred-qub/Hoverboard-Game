@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DudeAnimator : MonoBehaviour
 {
+    //references to different bones, physics objects and target positions as well as some values for adjustment
     public Transform waist;
     public Rigidbody capsuleHitboxRB;
     public float waistYoffset = -0.005f;
@@ -25,6 +26,7 @@ public class DudeAnimator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //stores the initial positions of the waist, left foot and right foot
         initialWaistPosition = waist.localPosition;
         initialLeftFootIKPosition = leftFootIKPoint.localPosition;
         initialRightFootIKPosition = rightFootIKPoint.localPosition;
@@ -33,6 +35,7 @@ public class DudeAnimator : MonoBehaviour
     void LateUpdate()
     {
         //all of this is an attempt to make the hips lag behind the movement of the collider to simulate vertical inertia while keeping the feet glued to the board
+        //kinda works but it's a little scuffed
         scaledYVelocity = capsuleHitboxRB.linearVelocity.y / scale;
 
         if (capsuleHitboxRB.linearVelocity.y < 0)
@@ -52,6 +55,8 @@ public class DudeAnimator : MonoBehaviour
         waist.localPosition = Vector3.Lerp(waist.localPosition, targetWaistPosition, Mathf.Clamp01(scaledYVelocity));
         leftFootIKPoint.localPosition = Vector3.Lerp(leftFootIKPoint.localPosition, targetLeftFootIKPosition, Mathf.Clamp01(scaledYVelocity)*0.2f);
         rightFootIKPoint.localPosition = Vector3.Lerp(rightFootIKPoint.localPosition, targetRightFootIKPosition, Mathf.Clamp01(scaledYVelocity)*0.2f);
+        
+        //literally glues the feet to the board
         leftFoot.position = leftFootIKPoint.position;
         rightFoot.position = rightFootIKPoint.position;
     }

@@ -4,15 +4,14 @@ using UnityEngine.Splines.Interpolators;
 
 public class boardAnimation : MonoBehaviour
 {
+    //right now this script just turns the boost trail on/off, but trick animations would likely be implemented here
     public TrailRenderer trail;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         trail = GameObject.Find("trailPoint").GetComponent<TrailRenderer>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
