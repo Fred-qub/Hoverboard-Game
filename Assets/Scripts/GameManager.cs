@@ -302,6 +302,7 @@ public class GameManager : MonoBehaviour
         addScore();
     }
 
+    //This is used by the player SFX script to adjust the combo parameter for the air trick sound
     public int getComboGaugeInt()
     {
         return comboGaugeInt;
