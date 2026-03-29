@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Splines.Interpolators;
 
 public class boardAnimation : MonoBehaviour
 {
