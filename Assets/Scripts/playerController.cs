@@ -39,7 +39,7 @@ public class playerController : MonoBehaviour
     //variables for boosting
     private float boostResource = 100f;
     public bool isBoosting = false;
-    private float speed = 0f;
+
 
     //values and references for UI stuff
     public GameObject boostMeterObject;
@@ -51,6 +51,10 @@ public class playerController : MonoBehaviour
 
     [SerializeField] private GameObject trickText;
     private float trickCooldown = 0.5f;
+    
+    //sound stuff
+    [SerializeField]
+    private PlayerSFX playerSFX;
 
     public Image boostVFX;
 
@@ -108,6 +112,7 @@ public class playerController : MonoBehaviour
             if (grounded)
             {
                 capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
+                playerSFX.startJumpEmitter();
             }
             else if (trickCooldown <= 0f)
             {

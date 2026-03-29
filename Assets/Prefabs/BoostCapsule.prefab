@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 999896895645407869}
   - component: {fileID: 6126257651808435205}
   - component: {fileID: 2234967523843750974}
+  - component: {fileID: 2251241344603510344}
   m_Layer: 0
   m_Name: BoostCapsule
   m_TagString: Untagged
@@ -125,3 +126,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostCapsuleIndex: 0
   parentGameObject: {fileID: 8095652583354777631}
+--- !u!114 &2251241344603510344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8095652583354777631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  EventReference:
+    Guid:
+      Data1: 173806907
+      Data2: 1241042552
+      Data3: -722478194
+      Data4: -612205961
+    Path: event:/UI/Start
+  Event: 
+  EventPlayTrigger: 3
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

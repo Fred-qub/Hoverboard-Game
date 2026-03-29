@@ -302,6 +302,11 @@ public class GameManager : MonoBehaviour
         addScore();
     }
 
+    public int getComboGaugeInt()
+    {
+        return comboGaugeInt;
+    }
+
     private void UpdateCombo()
     {
         //if the combo buffer drops below zero, reset the combo

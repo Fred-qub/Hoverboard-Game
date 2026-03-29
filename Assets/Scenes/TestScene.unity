@@ -1233,6 +1233,42 @@ Transform:
   - {fileID: 916683119}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &133364719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7087984536150719404, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+  m_PrefabInstance: {fileID: 733529431912005179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &133364722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133364719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1225091730
+      Data2: 1181717111
+      Data3: 1639496621
+      Data4: 1901862075
+    Path: event:/SFX/Boost Impulse
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &134659348 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8976198729105931978, guid: c3253de559dbd5d41a0ca231bc00a784, type: 3}
@@ -4501,6 +4537,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25f03247305c1f9468c4e4b3d468f661, type: 3}
+--- !u!1 &574959973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3459050226727982945, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+  m_PrefabInstance: {fileID: 733529431912005179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &586295930
 GameObject:
   m_ObjectHideFlags: 0
@@ -6925,7 +6966,40 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 492163768394310213, guid: db50a61a00c38ec479e4421af4029829, type: 3}
   m_PrefabInstance: {fileID: 733529431912005179}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &897762690
+--- !u!114 &897762691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897762687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93cecd3d4b6f424a92b2f8dc925dc38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRB: {fileID: 1896491482158217002}
+  boardHoverEmitter: {fileID: 1896491482158217006}
+  windRushEmitter: {fileID: 897762694}
+  trickEmitter: {fileID: 1490816628}
+  jumpEmitter: {fileID: 1669123835}
+  boostEmitter: {fileID: 133364722}
+  minSpeed: 16
+  maxSpeed: 140
+  playerController: {fileID: 897762692}
+  gameManager: {fileID: 1203980796}
+--- !u!114 &897762692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2469619784333353948, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+  m_PrefabInstance: {fileID: 733529431912005179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897762687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878a1963f06469e47ad75df2f8a7a610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &897762694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6940,11 +7014,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1625496590
-      Data2: 1114962982
-      Data3: -1736213855
-      Data4: 1333299179
-    Path: event:/SFX/Board Hover Loop
+      Data1: -1275333801
+      Data2: 1151936972
+      Data3: -1214192217
+      Data4: 1307597124
+    Path: event:/SFX/Wind Rushing
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 0
@@ -6960,22 +7034,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!114 &897762691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 897762687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c93cecd3d4b6f424a92b2f8dc925dc38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRB: {fileID: 1896491482158217002}
-  boardHover: {fileID: 897762690}
-  minSpeed: 16
-  maxSpeed: 140
 --- !u!1001 &903875459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8955,6 +9013,8 @@ GameObject:
   - component: {fileID: 1168114626}
   - component: {fileID: 1168114628}
   - component: {fileID: 1168114627}
+  - component: {fileID: 1168114630}
+  - component: {fileID: 1168114629}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -9080,6 +9140,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168114625}
   m_CullTransparentMesh: 1
+--- !u!114 &1168114629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168114625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1344153192
+      Data2: 1235886383
+      Data3: -1279383883
+      Data4: 640668975
+    Path: event:/UI/Mouse Over
+  Event: 
+  EventPlayTrigger: 17
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1168114630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168114625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -553748776
+      Data2: 1277236538
+      Data3: 177831330
+      Data4: -156668022
+    Path: event:/UI/Exit Sub Menu
+  Event: 
+  EventPlayTrigger: 19
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1180457967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11536,6 +11658,7 @@ GameObject:
   - component: {fileID: 1490816625}
   - component: {fileID: 1490816627}
   - component: {fileID: 1490816626}
+  - component: {fileID: 1490816628}
   m_Layer: 0
   m_Name: trickText
   m_TagString: Untagged
@@ -11701,6 +11824,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1490816628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490816624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -8061488
+      Data2: 1150869115
+      Data3: -1585495678
+      Data4: 1561480900
+    Path: event:/UI/Trick
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1494904684
 GameObject:
   m_ObjectHideFlags: 0
@@ -13202,6 +13356,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 805230517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1669123830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7512207698768411103, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+  m_PrefabInstance: {fileID: 733529431912005179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1669123835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669123830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 660865618
+      Data2: 1165433370
+      Data3: -632050777
+      Data4: 946152188
+    Path: event:/SFX/Jump
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1670752694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16895,6 +17085,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1045878557}
     - target: {fileID: 2469619784333353948, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+      propertyPath: playerSFX
+      value: 
+      objectReference: {fileID: 897762691}
+    - target: {fileID: 2469619784333353948, guid: db50a61a00c38ec479e4421af4029829, type: 3}
       propertyPath: trickText
       value: 
       objectReference: {fileID: 1490816624}
@@ -16943,10 +17137,19 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 492163768394310213, guid: db50a61a00c38ec479e4421af4029829, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 897762690}
+      addedObject: {fileID: 897762691}
     - targetCorrespondingSourceObject: {fileID: 492163768394310213, guid: db50a61a00c38ec479e4421af4029829, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 897762691}
+      addedObject: {fileID: 897762694}
+    - targetCorrespondingSourceObject: {fileID: 3459050226727982945, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1896491482158217006}
+    - targetCorrespondingSourceObject: {fileID: 7512207698768411103, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1669123835}
+    - targetCorrespondingSourceObject: {fileID: 7087984536150719404, guid: db50a61a00c38ec479e4421af4029829, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 133364722}
   m_SourcePrefab: {fileID: 100100000, guid: db50a61a00c38ec479e4421af4029829, type: 3}
 --- !u!1001 &880564913227670560
 PrefabInstance:
@@ -17035,6 +17238,41 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 441459562755401926, guid: db50a61a00c38ec479e4421af4029829, type: 3}
   m_PrefabInstance: {fileID: 733529431912005179}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1896491482158217006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574959973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1625496590
+      Data2: 1114962982
+      Data3: -1736213855
+      Data4: 1333299179
+    Path: event:/SFX/Board Hover Loop
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params:
+  - Name: Boosting
+    Value: 0
+  - Name: Speed
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &2963298678487535906
 PrefabInstance:
   m_ObjectHideFlags: 0
