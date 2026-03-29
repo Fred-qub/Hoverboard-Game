@@ -141,11 +141,11 @@ MonoBehaviour:
   CollisionTag: Player
   EventReference:
     Guid:
-      Data1: 173806907
-      Data2: 1241042552
-      Data3: -722478194
-      Data4: -612205961
-    Path: event:/UI/Start
+      Data1: 1843877855
+      Data2: 1273237399
+      Data3: -1156423799
+      Data4: -555599839
+    Path: event:/SFX/Boost Capsule Collect
   Event: 
   EventPlayTrigger: 3
   EventStopTrigger: 0

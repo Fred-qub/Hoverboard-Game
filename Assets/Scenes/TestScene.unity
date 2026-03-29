@@ -6978,7 +6978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93cecd3d4b6f424a92b2f8dc925dc38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRB: {fileID: 1896491482158217002}
   boardHoverEmitter: {fileID: 1896491482158217006}
   windRushEmitter: {fileID: 897762694}
   trickEmitter: {fileID: 1490816628}
@@ -6988,6 +6987,7 @@ MonoBehaviour:
   maxSpeed: 140
   playerController: {fileID: 897762692}
   gameManager: {fileID: 1203980796}
+  playerRB: {fileID: 1896491482158217002}
 --- !u!114 &897762692 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2469619784333353948, guid: db50a61a00c38ec479e4421af4029829, type: 3}
