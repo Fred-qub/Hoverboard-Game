@@ -52,7 +52,7 @@ public class playerController : MonoBehaviour
     [SerializeField] private GameObject trickText;
     private float trickCooldown = 0.5f;
     
-    //sound stuff
+    //reference for the script that controls sounds related to the player
     [SerializeField]
     private PlayerSFX playerSFX;
 
@@ -112,6 +112,8 @@ public class playerController : MonoBehaviour
             if (grounded)
             {
                 capsuleHitboxRB.AddForce(capsuleHitbox.up * jumpForce, ForceMode.Impulse);
+                
+                //plays the jump sound effect
                 playerSFX.startJumpEmitter();
             }
             else if (trickCooldown <= 0f)
